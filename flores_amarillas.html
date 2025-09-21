@@ -11,7 +11,7 @@
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #fffae6, #f7dfa5);
             min-height: 100vh;
-            overflow: auto;
+            overflow: auto; /* 🔹 scroll normal */
             color: #8B7500;
             display: flex;
             flex-direction: column;
@@ -20,6 +20,18 @@
             text-align: center;
             padding: 20px;
         }
+        
+        #flowers-container {
+            position: fixed;      /* 🔹 ya no afecta tamaño del body */
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* 🔹 para no bloquear clicks */
+            overflow: hidden;     /* 🔹 flor fuera del viewport desaparece */
+            z-index: 1;
+        }
+
 
         .container {
             max-width: 600px;
@@ -227,12 +239,11 @@
             0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
             50% { transform: translate(-50%, -52%) scale(1.04) rotate(3deg); }
         }
-
         @keyframes petal-move {
-            0%, 100% { transform: rotate(var(--initial-rotate)) rotateX(10deg) scale(1.5); }
-            50% { transform: rotate(calc(var(--initial-rotate) + 3deg)) rotateX(12deg) scale(1.02); }
+            0%, 100% { transform: rotate(var(--initial-rotate)) scale(1.5); }
+            50% { transform: rotate(calc(var(--initial-rotate) + 3deg)) scale(1.02); }
         }
-        
+
         /* Animación de salida */
         @keyframes fadeOutScale {
             0% { opacity: 1; transform: scale(1); }
