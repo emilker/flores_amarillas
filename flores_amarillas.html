@@ -11,7 +11,7 @@
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #fffae6, #f7dfa5);
             min-height: 100vh;
-            overflow: hidden;
+            overflow: auto;
             color: #8B7500;
             display: flex;
             flex-direction: column;
@@ -281,75 +281,90 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const flowersContainer = document.getElementById('flowers-container');
-            const mainContainer = document.getElementById('main-container');
-            const footer = document.getElementById('footer');
-            const finalRose = document.getElementById('final-rose');
-            const finalStem = document.getElementById('final-stem');
-            const leaf1 = document.querySelector('.leaf1');
-            const leaf2 = document.querySelector('.leaf2');
-            const finalMessage = document.getElementById('final-message');
-            const countdown = document.getElementById('countdown');
-            let count = 15;
+    const flowersContainer = document.getElementById('flowers-container');
+    const mainContainer = document.getElementById('main-container');
+    const footer = document.getElementById('footer');
+    const finalRose = document.getElementById('final-rose');
+    const finalStem = document.getElementById('final-stem');
+    const leaf1 = document.querySelector('.leaf1');
+    const leaf2 = document.querySelector('.leaf2');
+    const finalMessage = document.getElementById('final-message');
+    const countdown = document.getElementById('countdown');
+    let count = 15;
 
-            setInterval(() => {
-                createFlower(Date.now()); // crea una flor nueva cada medio segundo
-            }, 200);
+    // 🔹 Reducir la frecuencia de creación de flores y eliminar fuera de pantalla
+    setInterval(() => {
+        createFlower(Date.now());
+        // Limitar máximo 30 flores al mismo tiempo
+        if(flowersContainer.children.length > 30) {
+            flowersContainer.removeChild(flowersContainer.firstChild);
+        }
+    }, 700); // antes 500ms, ahora 700ms
 
-            function createFlower(id) {
-                const flower = document.createElement('div');
-                flower.classList.add('flower');
-                flower.id = 'flower-' + id;
-                const stem = document.createElement('div');
-                stem.classList.add('stem');
-                flower.appendChild(stem);
-                const size = Math.random() * 15 + 10;
-                flower.style.left = `${Math.random() * 100}vw`;
-                flower.style.top = `-${(Math.random() * 200 + 30)}px`;
-                flower.style.width = `${size}px`;
-                flower.style.height = `${size}px`;
-                flower.style.animation = `fall ${Math.random() * 10 + 5}s linear infinite`;
-                flower.style.animationDelay = `${Math.random() * 5}s`;
-                flowersContainer.appendChild(flower);
-            }
+    function createFlower(id) {
+        const flower = document.createElement('div');
+        flower.classList.add('flower');
+        flower.id = 'flower-' + id;
 
-            const countdownInterval = setInterval(() => {
-                count--;
-                countdown.textContent = count;
-                if (count <= 0) {
-                    clearInterval(countdownInterval);
-                    startTransformation();
-                }
-            }, 1000);
+        const stem = document.createElement('div');
+        stem.classList.add('stem');
+        flower.appendChild(stem);
 
-                function startTransformation() {
-                countdown.style.opacity = '0';
+        const size = Math.random() * 15 + 10;
+        flower.style.left = `${Math.random() * 100}vw`;
+        flower.style.top = `-${(Math.random() * 200 + 30)}px`;
+        flower.style.width = `${size}px`;
+        flower.style.height = `${size}px`;
 
-                // 🔥 Destruir contenedor con animación
-                mainContainer.style.animation = "fadeOutScale 1.2s ease forwards";
-                footer.style.opacity = '0';
+        // Animación más ligera, duración variable
+        const duration = Math.random() * 6 + 4; // 4-10s
+        flower.style.animation = `fall ${duration}s linear forwards`;
+        flower.style.animationDelay = `${Math.random() * 5}s`;
 
-                // 🔥 Destruir corazones
-                const hearts = document.querySelectorAll('.heart');
-                hearts.forEach((heart, i) => {
-                    heart.style.animation = `fadeOutScale 1s ease forwards`;
-                    heart.style.animationDelay = `${i * 0.2}s`; // un pequeño desfase para que no se vayan todos iguales
-                });
+        flowersContainer.appendChild(flower);
 
-                // 🌹 Mostrar rosa final después de la salida
-                setTimeout(() => {
-                    
-                    finalRose.style.opacity = '1';
-                    finalRose.style.transform = 'translate(-50%, -50%) scale(1)';
-                    finalRose.style.animation = 'float 4s ease-in-out infinite';
-                    finalStem.style.opacity = '1';
-                    leaf1.style.opacity = '1';
-                    leaf2.style.opacity = '1';
-                    finalMessage.style.opacity = '1';
-                }, 1600);
-            }
+        // 🔹 Limpiar flor después de caer
+        setTimeout(() => {
+            if(flower.parentElement) flowersContainer.removeChild(flower);
+        }, duration * 1000 + 1000);
+    }
 
+    const countdownInterval = setInterval(() => {
+        count--;
+        countdown.textContent = count;
+        if (count <= 0) {
+            clearInterval(countdownInterval);
+            startTransformation();
+        }
+    }, 1000);
+
+    function startTransformation() {
+        countdown.style.opacity = '0';
+
+        // 🔥 Destruir contenedor con animación
+        mainContainer.style.animation = "fadeOutScale 1.2s ease forwards";
+        footer.style.opacity = '0';
+
+        // 🔥 Destruir corazones
+        const hearts = document.querySelectorAll('.heart');
+        hearts.forEach((heart, i) => {
+            heart.style.animation = `fadeOutScale 1s ease forwards`;
+            heart.style.animationDelay = `${i * 0.2}s`;
         });
+
+        // 🌹 Mostrar rosa final después de la salida
+        setTimeout(() => {
+            finalRose.style.opacity = '1';
+            finalRose.style.transform = 'translate(-50%, -50%) scale(1)';
+            finalRose.style.animation = 'float 4s ease-in-out infinite';
+            finalStem.style.opacity = '1';
+            leaf1.style.opacity = '1';
+            leaf2.style.opacity = '1';
+            finalMessage.style.opacity = '1';
+        }, 1600);
+    }
+});
+
     </script>
 </body>
 </html>
