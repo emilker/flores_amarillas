@@ -1,0 +1,25 @@
+body, html {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: linear-gradient(to top, #fffbea, #fff5d7);
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#mensaje {
+  position: absolute;
+  top: 40%;
+  font-size: 2.5rem;
+  color: #e6b800;
+  text-align: center;
+  z-index: 10;
+  text-shadow: 0 0 8px #fff;
+}
+
+canvas {
+  display: block;
+}

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día de las Flores Amarillas - Para Mi Amor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            margin: 20px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #FFEC8B;
+            font-weight: 300;
+        }
+        
+        .separator {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #FFD700, transparent);
+            margin: 25px auto;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #f8f8f8;
+        }
+        
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(to right, #FFD700, #FFA500);
+            color: #333;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #FFA500, #FFD700);
+            z-index: -1;
+            transition: transform 0.3s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+        
+        .btn:hover:before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .btn:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .btn i {
+            margin-left: 10px;
+        }
+        
+        .hearts {
+            font-size: 2rem;
+            margin: 30px 0;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        
+        .flower-icon {
+            display: inline-block;
+            margin: 0 10px;
+            color: #FFD700;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .delay-1 { animation-delay: 0.5s; }
+        .delay-2 { animation-delay: 1s; }
+        .delay-3 { animation-delay: 1.5s; }
+        
+        footer {
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Efectos de confeti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #FFD700;
+            opacity: 0.7;
+            border-radius: 0;
+            z-index: -1;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.5rem; }
+            .container { padding: 25px; }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Contenedor */
+        .container {
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            margin: 20px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        /* Título */
+        .container h1 {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        /* Subtítulo */
+        .container h2 {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 1.2s;
+        }
+
+        /* Corazones */
+        .hearts i {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+        .hearts i:nth-child(1) { animation-delay: 1.6s; }
+        .hearts i:nth-child(2) { animation-delay: 1.9s; }
+        .hearts i:nth-child(3) { animation-delay: 2.2s; }
+
+        /* Párrafos */
+        .container p {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+        .container p:nth-of-type(1) { animation-delay: 2.5s; }
+        .container p:nth-of-type(2) { animation-delay: 2.8s; }
+        .container p:nth-of-type(3) { animation-delay: 3.1s; }
+
+        /* Botón */
+        .container .btn {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 3.5s;
+        }
+    </style>
+</head>
+<body>
+    <div id="confetti-container"></div>
+    
+    <div class="container">
+        <h1>Día de las Flores Amarillas</h1>
+        
+        <div class="separator"></div>
+        
+        <h2>Un regalo especial para mi amor a distancia</h2>
+        
+        <div class="hearts">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+        </div>
+        
+        <p>Aunque la distancia nos separe, mi amor por ti crece cada día más. En este día especial, quiero honrar nuestro amor con este regalo digital.</p>
+        
+        <p>Las flores amarillas simbolizan la amistad, el cariño y la alegría que me brindas cada día, incluso desde lejos.</p>
+        
+        <p>Haz clic en el botón de abajo para descubrir tu regalo especial:</p>
+        
+        <a href="flores_amarillas.html" class="btn">Descubrir mi regalo <i class="fas fa-gift"></i></a>
+        
+    </div>
+    
+    <footer>
+        Creado con <i class="fas fa-heart" style="color: #ff5252;"></i> 
+    </footer>
+
+    <script>
+        // Crear efecto de confeti
+        document.addEventListener('DOMContentLoaded', function() {
+            const confettiContainer = document.getElementById('confetti-container');
+            const confettiCount = 50;
+            const colors = ['#FFD700', '#FFA500', '#FFEC8B', '#FFFFFF'];
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 10 + 5;
+                const posX = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 5;
+                
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.left = `${posX}vw`;
+                confetti.style.top = `-${size}px`;
+                confetti.style.animation = `fall ${duration}s linear infinite`;
+                confetti.style.animationDelay = `${delay}s`;
+                
+                confettiContainer.appendChild(confetti);
+            }
+            
+            // Función para hacer caer confeti
+            function fall(el) {
+                const maxHeight = window.innerHeight;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 5;
+                
+                el.style.animation = `fall ${duration}s linear infinite`;
+                el.style.animationDelay = `${delay}s`;
+            }
+            
+            // Aplicar animación a todos los elementos de confeti
+            document.querySelectorAll('.confetti').forEach(fall);
+        });
+        
+        // Efecto de caída para el confeti
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                from { transform: translateY(0) rotate(0deg); }
+                to { transform: translateY(100vh) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
